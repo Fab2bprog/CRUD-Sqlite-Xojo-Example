@@ -13,4 +13,4 @@ You can consider this program as a kind of structure on which all sqlite databas
 
 The application code is commented to make learning easier. Everything has been done to make the code as adaptable as possible.
 
-Created with Xojo 2024 release 4.2
+Created with Xojo 2024 release 4.2, using API 2.
