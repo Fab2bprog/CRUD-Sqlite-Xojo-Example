@@ -723,7 +723,7 @@ End
 		#tag Note
 			// ONLY 3 values possible : CREATE, READ, UPDATE
 		#tag EndNote
-		Protected CrudMode As String = "MOD"
+		Protected CrudMode As String = "READ"
 	#tag EndProperty
 
 	#tag Property, Flags = &h21

@@ -259,11 +259,43 @@ Begin DesktopWindow Win_CustomerList
          Top             =   36
          Transparent     =   False
          Visible         =   True
-         Width           =   198
+         Width           =   115
          _mIndex         =   0
          _mInitialParent =   ""
          _mName          =   ""
          _mPanelIndex    =   0
+      End
+      Begin DesktopButton Button1
+         AllowAutoDeactivate=   True
+         Bold            =   False
+         Cancel          =   False
+         Caption         =   "OK"
+         Default         =   True
+         Enabled         =   True
+         FontName        =   "System"
+         FontSize        =   0.0
+         FontUnit        =   0
+         Height          =   20
+         Index           =   -2147483648
+         InitialParent   =   "Grb_Search"
+         Italic          =   False
+         Left            =   635
+         LockBottom      =   False
+         LockedInPosition=   False
+         LockLeft        =   True
+         LockRight       =   False
+         LockTop         =   True
+         MacButtonStyle  =   0
+         Scope           =   0
+         TabIndex        =   5
+         TabPanelIndex   =   0
+         TabStop         =   True
+         Tooltip         =   ""
+         Top             =   36
+         Transparent     =   False
+         Underline       =   False
+         Visible         =   True
+         Width           =   80
       End
    End
 End
@@ -283,7 +315,7 @@ End
 		  
 		  // Allows you to automatically collect the list of name fields in a table and fill the drop-down menu with this information
 		  Pop_FieldName.RemoveAllRows
-		   While Not ColNameRS.AfterLastRow
+		  While Not ColNameRS.AfterLastRow
 		    Pop_FieldName.AddRow  ColNameRS.Column("name").StringValue
 		    ColNameRS.MoveToNextRow
 		  wend
@@ -319,14 +351,12 @@ End
 		  Var MDiagB As MessageDialogButton                 ' for handling the result
 		  
 		  Var KeySelection As Int64
-		  Var DeletedCustomer as Class_Customer
+		  
 		  
 		  if LST_RESULT.SelectedRowCount =0 Then
 		    MessageBox("To use this function you must first select an element in the list")
 		    exit sub
 		  end if
-		  
-		  DeletedCustomer =  new Class_Customer
 		  
 		  MesDiag.IconType = MessageDialog.IconTypes.Caution ' display warning icon
 		  MesDiag.ActionButton.Caption = "Yes"
@@ -341,14 +371,11 @@ End
 		  Case MesDiag.ActionButton
 		    
 		    KeySelection= LST_RESULT.CellTextAt(LST_RESULT.SelectedRowIndex,0).ToInt64
-		    DeletedCustomer.DBaseID=App.MainDB
-		    DeletedCustomer.SqlQuerySource="SELECT * FROM "+DeletedCustomer.TableName+" WHERE "+DeletedCustomer.KeyTableName+" = "+KeySelection.ToString
-		    Call DeletedCustomer.Run_SqlQuerySource
-		    // Delete the record in the sqlite database
-		    Call DeletedCustomer.Record_Delete 
+		    if SrcDataObject.Record_Delete(KeySelection) then
+		      //Remove the selected row
+		      LST_RESULT.RemoveRowAt(LST_RESULT.SelectedRowIndex)
+		    end
 		    
-		    //Remove the selected row
-		    LST_RESULT.RemoveRowAt(LST_RESULT.SelectedRowIndex)
 		    
 		  Case MesDiag.AlternateActionButton
 		    exit sub
@@ -565,7 +592,6 @@ End
 	#tag Property, Flags = &h21
 		#tag Note
 			// Represents the data source class which will allow you to read, create and modify your data in the database
-			
 		#tag EndNote
 		Private SrcDataObject As Class_Customer
 	#tag EndProperty
@@ -655,6 +681,22 @@ End
 		    return true
 		  end if
 		End Function
+	#tag EndEvent
+#tag EndEvents
+#tag Events Button1
+	#tag Event
+		Sub Pressed()
+		  Var i as int64
+		  
+		  For i = 1 to 5000
+		    SrcDataObject.Field_FirstName=System.Random.InRange(1000,10000).ToString.ReplaceAll("1","A").ReplaceAll("2","B").ReplaceAll("3","C")
+		    SrcDataObject.Field_LastName=System.Random.InRange(1000,10000).ToString.ReplaceAll("1","A").ReplaceAll("2","B").ReplaceAll("3","C")
+		    SrcDataObject.Field_CreditAmount= System.Random.InRange(1000,10000)
+		    SrcDataObject.Field_BirthDay=DateTime.Now
+		    Call SrcDataObject.Record_Create
+		  next
+		  
+		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior

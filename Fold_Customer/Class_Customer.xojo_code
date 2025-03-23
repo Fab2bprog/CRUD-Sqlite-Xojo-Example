@@ -104,6 +104,8 @@ Protected Class Class_Customer
 		  
 		  
 		  Var row As New DatabaseRow
+		  
+		  
 		  row.Column(KeyTableName).Int64Value  = KeyTableValue
 		  row.Column("FIRSTNAME").StringValue  = Field_FirstName
 		  row.Column("LASTNAME").StringValue   = Field_LastName
@@ -129,17 +131,36 @@ Protected Class Class_Customer
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function Record_Delete() As Boolean
-		  // Delete current record 
+		Function Record_Delete(Del_KeySelection as int64 = -1) As Boolean
 		  
-		  Try
-		    DBaseRS.RemoveRow
-		  Catch error As DatabaseException
-		    MessageBox("DB Error: " + error.Message)
-		    return false
-		  End Try
+		  Select Case Del_KeySelection
+		    
+		  Case Is >=0
+		    
+		    // if Del_KeySelection<0 then you want to delete a specific record and not the current record
+		    Try
+		      DBaseID.ExecuteSQL("DELETE FROM "+TableName+" WHERE "+KeyTableName+" = "+Del_KeySelection.ToString)
+		      return true
+		    Catch error As DatabaseException
+		      MessageBox("DB Error: " + error.Message)
+		      return false
+		    End Try
+		    
+		  Case else
+		    
+		    // if Del_KeySelection=-1 then Delete current record 
+		    Try
+		      DBaseRS.RemoveRow
+		      return true
+		    Catch error As DatabaseException
+		      MessageBox("DB Error: " + error.Message)
+		      return false
+		    End Try
+		    
+		  end Select
 		  
-		  return true
+		  
+		  return false
 		End Function
 	#tag EndMethod
 
