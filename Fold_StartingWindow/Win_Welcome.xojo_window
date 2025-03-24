@@ -10,20 +10,20 @@ Begin DesktopWindow Win_Welcome
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   400
+   Height          =   500
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
    MaximumWidth    =   32000
    MenuBar         =   1840517119
    MenuBarVisible  =   False
-   MinimumHeight   =   64
-   MinimumWidth    =   64
+   MinimumHeight   =   400
+   MinimumWidth    =   500
    Resizeable      =   True
    Title           =   "CRUD Xojo Sqlite Database Example"
    Type            =   0
    Visible         =   True
-   Width           =   674
+   Width           =   800
    Begin DesktopImageViewer Image_LicenceMIT
       Active          =   False
       AllowAutoDeactivate=   True
@@ -44,7 +44,7 @@ Begin DesktopWindow Win_Welcome
       TabIndex        =   0
       TabPanelIndex   =   0
       Tooltip         =   ""
-      Top             =   299
+      Top             =   399
       Transparent     =   False
       Visible         =   True
       Width           =   123
@@ -79,11 +79,11 @@ Begin DesktopWindow Win_Welcome
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   291
+      Top             =   391
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   500
+      Width           =   626
    End
    Begin DesktopSeparator Separator1
       Active          =   False
@@ -104,10 +104,10 @@ Begin DesktopWindow Win_Welcome
       TabIndex        =   2
       TabPanelIndex   =   0
       Tooltip         =   ""
-      Top             =   274
+      Top             =   374
       Transparent     =   False
       Visible         =   True
-      Width           =   674
+      Width           =   800
       _mIndex         =   0
       _mInitialParent =   ""
       _mName          =   ""
@@ -139,11 +139,11 @@ Begin DesktopWindow Win_Welcome
       TextAlignment   =   0
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   326
+      Top             =   426
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   500
+      Width           =   626
    End
    Begin DesktopLabel Labe_Info2
       AllowAutoDeactivate=   True
@@ -152,11 +152,11 @@ Begin DesktopWindow Win_Welcome
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   65
+      Height          =   293
       Index           =   -2147483648
       Italic          =   False
       Left            =   20
-      LockBottom      =   False
+      LockBottom      =   True
       LockedInPosition=   False
       LockLeft        =   True
       LockRight       =   True
@@ -167,15 +167,15 @@ Begin DesktopWindow Win_Welcome
       TabIndex        =   4
       TabPanelIndex   =   0
       TabStop         =   True
-      Text            =   "Use the ""File"" menu to open an existing database ( database_example.sqlite ) provided with the example or to create a new database. Then select the ""Customer"" option from the ""Tables"" menu"
+      Text            =   "Use the ""File"" menu to open an existing database ( database_example.sqlite ) provided with the example or to create a new database. Then select the ""Customer"" option from the ""Tables"" menu.\n\nIMPORTANT : In the source code. In the App, notes section: you will find several notes that will help you understand the source code and modify it. These explanations are valuable for understanding how the program works."
       TextAlignment   =   2
       TextColor       =   &c000000
       Tooltip         =   ""
-      Top             =   100
+      Top             =   59
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   634
+      Width           =   760
    End
 End
 #tag EndDesktopWindow

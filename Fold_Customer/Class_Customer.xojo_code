@@ -11,6 +11,7 @@ Protected Class Class_Customer
 		Private Sub Fields_Init()
 		  // Initializes class properties with default values
 		  
+		  // [Update-XojoCode-NextLines]
 		  KeyTableValue         = 0
 		  Field_FirstName       = ""
 		  Field_LastName       =  ""
@@ -37,6 +38,7 @@ Protected Class Class_Customer
 		Private Sub Fields_Load()
 		  // Loads the values ​​of a table record into the corresponding properties of the class.
 		  
+		  // [Update-XojoCode-NextLines]
 		  Try
 		    KeyTableValue         = DBaseRS.Column(KeyTableName).Int64Value
 		  Catch error As NilObjectException
@@ -105,7 +107,7 @@ Protected Class Class_Customer
 		  
 		  Var row As New DatabaseRow
 		  
-		  
+		  // [Update-XojoCode-NextLines]
 		  row.Column(KeyTableName).Int64Value  = KeyTableValue
 		  row.Column("FIRSTNAME").StringValue  = Field_FirstName
 		  row.Column("LASTNAME").StringValue   = Field_LastName
@@ -137,7 +139,7 @@ Protected Class Class_Customer
 		    
 		  Case Is >=0
 		    
-		    // if Del_KeySelection<0 then you want to delete a specific record and not the current record
+		    // if Del_KeySelection>=0 then you want to delete a specific record and not the current record
 		    Try
 		      DBaseID.ExecuteSQL("DELETE FROM "+TableName+" WHERE "+KeyTableName+" = "+Del_KeySelection.ToString)
 		      return true
@@ -239,6 +241,7 @@ Protected Class Class_Customer
 		  Try
 		    DBaseRS.EditRow
 		    
+		    // [Update-XojoCode-NextLines]
 		    DBaseRS.Column(KeyTableName).Int64Value  = KeyTableValue
 		    DBaseRS.Column("FIRSTNAME").StringValue  = Field_FirstName
 		    DBaseRS.Column("LASTNAME").StringValue   = Field_LastName
@@ -300,29 +303,45 @@ Protected Class Class_Customer
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		#tag Note
+			// [Update-XojoCode-NextLines]
+		#tag EndNote
 		Field_BirthDay As DateTime
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		#tag Note
+			// [Update-XojoCode-NextLines]
+		#tag EndNote
 		Field_CreditAmount As double = 0
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		#tag Note
+			// [Update-XojoCode-NextLines]
+		#tag EndNote
 		Field_FirstName As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		#tag Note
+			// [Update-XojoCode-NextLines]
+		#tag EndNote
 		Field_LastName As String
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
 		#tag Note
 			// Name of the key identifying the record in the table
+			// [Update-XojoCode-NextLines]
 		#tag EndNote
 		KeyTableName As string = "KEY_ID"
 	#tag EndProperty
 
 	#tag Property, Flags = &h0
+		#tag Note
+			// [Update-XojoCode-NextLines]
+		#tag EndNote
 		KeyTableValue As Int64 = -1
 	#tag EndProperty
 
@@ -337,6 +356,7 @@ Protected Class Class_Customer
 	#tag Property, Flags = &h0
 		#tag Note
 			// Name of the table
+			// [Update-XojoCode-NextLines]
 		#tag EndNote
 		TableName As string = "CUSTOMERS"
 	#tag EndProperty

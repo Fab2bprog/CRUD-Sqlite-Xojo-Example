@@ -42,5 +42,16 @@ Inherits DesktopToolbar
 		ButtonStyle = 0
 		Icon = 2146676735
 	End
+	Begin DesktopToolbarButton ToolItem2
+		Caption = "Untitled"
+		Tooltip = ""
+		ButtonStyle = 1
+	End
+	Begin DesktopToolbarButton ToIt_Export
+		Caption = "Export Data"
+		Tooltip = ""
+		ButtonStyle = 0
+		Icon = 1209497599
+	End
 End
 #tag EndDesktopToolbar

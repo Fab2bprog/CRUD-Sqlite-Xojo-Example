@@ -10,20 +10,20 @@ Begin DesktopWindow Win_CustomerList
    HasFullScreenButton=   False
    HasMaximizeButton=   True
    HasMinimizeButton=   True
-   Height          =   446
+   Height          =   500
    ImplicitInstance=   True
    MacProcID       =   0
    MaximumHeight   =   32000
    MaximumWidth    =   32000
    MenuBar         =   ""
    MenuBarVisible  =   False
-   MinimumHeight   =   64
-   MinimumWidth    =   64
+   MinimumHeight   =   350
+   MinimumWidth    =   640
    Resizeable      =   True
    Title           =   "Customers List"
    Type            =   0
    Visible         =   True
-   Width           =   746
+   Width           =   1000
    Begin DesktopGroupBox Grb_Result
       AllowAutoDeactivate=   True
       Bold            =   False
@@ -32,7 +32,7 @@ Begin DesktopWindow Win_CustomerList
       FontName        =   "System"
       FontSize        =   0.0
       FontUnit        =   0
-      Height          =   343
+      Height          =   397
       Index           =   -2147483648
       Italic          =   False
       Left            =   20
@@ -50,7 +50,7 @@ Begin DesktopWindow Win_CustomerList
       Transparent     =   False
       Underline       =   False
       Visible         =   True
-      Width           =   706
+      Width           =   960
       Begin DesktopListBox LST_RESULT
          AllowAutoDeactivate=   True
          AllowAutoHideScrollbars=   True
@@ -74,7 +74,7 @@ Begin DesktopWindow Win_CustomerList
          HasHorizontalScrollbar=   False
          HasVerticalScrollbar=   True
          HeadingIndex    =   -1
-         Height          =   319
+         Height          =   373
          Index           =   -2147483648
          InitialParent   =   "Grb_Result"
          InitialValue    =   "Number	First_Name	Second_Name	Credit_Amount	BirthDay"
@@ -96,7 +96,7 @@ Begin DesktopWindow Win_CustomerList
          Transparent     =   False
          Underline       =   False
          Visible         =   True
-         Width           =   683
+         Width           =   937
          _ScrollOffset   =   0
          _ScrollWidth    =   -1
       End
@@ -136,7 +136,7 @@ Begin DesktopWindow Win_CustomerList
       Transparent     =   True
       Underline       =   False
       Visible         =   True
-      Width           =   706
+      Width           =   960
       Begin DesktopLabel Lab_TypeField
          AllowAutoDeactivate=   True
          Bold            =   False
@@ -246,7 +246,7 @@ Begin DesktopWindow Win_CustomerList
          LockBottom      =   False
          LockedInPosition=   False
          LockLeft        =   True
-         LockRight       =   False
+         LockRight       =   True
          LockTop         =   True
          MaximumRecentItems=   5
          PanelIndex      =   0
@@ -259,43 +259,11 @@ Begin DesktopWindow Win_CustomerList
          Top             =   36
          Transparent     =   False
          Visible         =   True
-         Width           =   115
+         Width           =   464
          _mIndex         =   0
          _mInitialParent =   ""
          _mName          =   ""
          _mPanelIndex    =   0
-      End
-      Begin DesktopButton Button1
-         AllowAutoDeactivate=   True
-         Bold            =   False
-         Cancel          =   False
-         Caption         =   "OK"
-         Default         =   True
-         Enabled         =   True
-         FontName        =   "System"
-         FontSize        =   0.0
-         FontUnit        =   0
-         Height          =   20
-         Index           =   -2147483648
-         InitialParent   =   "Grb_Search"
-         Italic          =   False
-         Left            =   635
-         LockBottom      =   False
-         LockedInPosition=   False
-         LockLeft        =   True
-         LockRight       =   False
-         LockTop         =   True
-         MacButtonStyle  =   0
-         Scope           =   0
-         TabIndex        =   5
-         TabPanelIndex   =   0
-         TabStop         =   True
-         Tooltip         =   ""
-         Top             =   36
-         Transparent     =   False
-         Underline       =   False
-         Visible         =   True
-         Width           =   80
       End
    End
 End
@@ -391,6 +359,66 @@ End
 		Sub Action_Exit()
 		  self.Close
 		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Function Action_Export() As Boolean
+		  ObjExport = new Class_Export
+		  ObjExport.DBaseID   = App.MainDB
+		  ObjExport.SqlQuerySource = SrcDataObject.SqlQuerySource
+		  
+		  if not ObjExport.Run_SqlQuerySource then
+		    MessageBox "CSV export of current page failed"
+		    return false
+		  end if
+		  
+		  // Excel export is only available on PC Windows platform
+		  #If TargetWindows Then
+		    
+		    // WARNING 1 : If you want to use Excel export: You will need to copy the MSOfficeAutomation plugin (located in the Extras folder of the installation) to the Plugins folder and restart Xojo
+		    // WARNING 2  : After restart Xojo go to Class Export.Export_Excel and uncomment the code
+		    // WARNING 3  : You absolutely need to have Microsoft Excel installed on your Windows PC to use Excel Export
+		    
+		    if not ObjExport.Export_Excel then
+		      
+		      if Not ObjExport.Select_File("CSV","csv")  then
+		        return false
+		      end if
+		      
+		      if not ObjExport.Export_CSV then
+		        MessageBox "CSV export of current page failed"
+		        return false
+		      else
+		        MessageBox "Export csv with "+str(ObjExport.DBaseRS.RowCount)+" lines ok."
+		      end if
+		    end if
+		    
+		  #Else
+		    
+		    if Not ObjExport.Select_File("CSV","csv")  then
+		      return false
+		    end if
+		    
+		    if not ObjExport.Export_CSV then
+		      MessageBox "CSV export of current page failed"
+		      return false
+		    else
+		      MessageBox "Export csv with "+str(ObjExport.DBaseRS.RowCount)+" lines ok."
+		    end if
+		    
+		  #Endif
+		  
+		  
+		  
+		  
+		  
+		  
+		  return true
+		  
+		  
+		  
+		  
+		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
@@ -495,6 +523,7 @@ End
 		  // Fill the list
 		  Do
 		    
+		    // [Update-XojoCode-NextLines]
 		    LST_RESULT.AddRow  str(SrcDataObject.KeyTableValue)
 		    LST_RESULT.CellTextAt(LST_RESULT.LastRowIndex,1) = str(SrcDataObject.Field_FirstName)
 		    LST_RESULT.CellTextAt(LST_RESULT.LastRowIndex,2) = str(SrcDataObject.Field_LastName)
@@ -589,6 +618,10 @@ End
 	#tag EndMethod
 
 
+	#tag Property, Flags = &h0
+		ObjExport As Class_Export
+	#tag EndProperty
+
 	#tag Property, Flags = &h21
 		#tag Note
 			// Represents the data source class which will allow you to read, create and modify your data in the database
@@ -647,7 +680,9 @@ End
 		  Case "ToIt_Delete"
 		    // Delete the selected line in the list
 		    Call Action_Delete
-		    
+		  Case "ToIt_Export"
+		    // Export list into file
+		    Call Action_Export
 		  end select
 		  
 		End Sub
@@ -681,22 +716,6 @@ End
 		    return true
 		  end if
 		End Function
-	#tag EndEvent
-#tag EndEvents
-#tag Events Button1
-	#tag Event
-		Sub Pressed()
-		  Var i as int64
-		  
-		  For i = 1 to 5000
-		    SrcDataObject.Field_FirstName=System.Random.InRange(1000,10000).ToString.ReplaceAll("1","A").ReplaceAll("2","B").ReplaceAll("3","C")
-		    SrcDataObject.Field_LastName=System.Random.InRange(1000,10000).ToString.ReplaceAll("1","A").ReplaceAll("2","B").ReplaceAll("3","C")
-		    SrcDataObject.Field_CreditAmount= System.Random.InRange(1000,10000)
-		    SrcDataObject.Field_BirthDay=DateTime.Now
-		    Call SrcDataObject.Record_Create
-		  next
-		  
-		End Sub
 	#tag EndEvent
 #tag EndEvents
 #tag ViewBehavior

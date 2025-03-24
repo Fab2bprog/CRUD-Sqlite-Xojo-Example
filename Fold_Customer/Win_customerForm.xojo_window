@@ -555,6 +555,7 @@ End
 		Sub ControlsToScreen()
 		  // Updates the form fields relative to the data source
 		  
+		  // [Update-XojoCode-NextLines]
 		  Txt_Code.Text                       =    SrcDataObject.KeyTableValue.ToString
 		  Txt_FirstName.Text               =    SrcDataObject.Field_FirstName
 		  Txt_LastName.Text               =    SrcDataObject.Field_LastName
@@ -580,6 +581,7 @@ End
 		    Lab_Code.Visible=False
 		    Txt_Code.Visible=False
 		    
+		    // [Update-XojoCode-NextLines]
 		    SrcDataObject= new Class_Customer
 		    SrcDataObject.DBaseID=App.MainDB
 		    
@@ -601,7 +603,7 @@ End
 		  end if
 		  
 		  
-		  
+		  // [Update-XojoCode-NextLines]
 		  SrcDataObject= new Class_Customer
 		  SrcDataObject.DBaseID=App.MainDB
 		  SrcDataObject.SqlQuerySource="SELECT * FROM "+SrcDataObject.TableName+" WHERE "+SrcDataObject.KeyTableName+"="+KeyDataValue.ToString
@@ -624,6 +626,7 @@ End
 		Sub Define_InitialValues()
 		  //Memorization of variables in their initial state in order to detect modifications to the form later
 		  
+		  // [Update-XojoCode-NextLines]
 		  Initial_Code                =  SrcDataObject.KeyTableValue.ToString
 		  Initial_FirstName        =  SrcDataObject.Field_FirstName
 		  Initial_LastName        =  SrcDataObject.Field_LastName
@@ -640,6 +643,7 @@ End
 		Function Detect_Modif() As Boolean
 		  // Allows you to detect if the user has modified information in the form
 		  
+		  // [Update-XojoCode-NextLines]
 		  if not ( Txt_Code.Text                =  Initial_Code          )  then return true
 		  if not ( Txt_FirstName.Text         =  Initial_FirstName    )  then return true
 		  if not ( Txt_LastName.Text         =  Initial_LastName    )  then return true
@@ -676,6 +680,7 @@ End
 		Sub ScreenToControls()
 		  // Transfer information from form fields to data source properties
 		  
+		  // [Update-XojoCode-NextLines]
 		  SrcDataObject.KeyTableValue        = Txt_Code.Text.ToInt64
 		  SrcDataObject.Field_FirstName      = Txt_FirstName.Text
 		  SrcDataObject.Field_LastName      = Txt_LastName.Text
