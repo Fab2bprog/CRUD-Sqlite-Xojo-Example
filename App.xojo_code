@@ -250,7 +250,7 @@ Inherits DesktopApplication
 	#tag Note, Name = Licence MIT
 		MIT License
 		
-		Copyright (c) 2025 Fabrice Garcia, 20290 Borgo, Corsica, France, Europe.
+		Copyright (c) 2025 Fabrice Garcia,  20290 Borgo,  Corsica Island , France, Europe.
 		
 		Permission is hereby granted, free of charge, to any person obtaining a copy
 		of this software and associated documentation files (the "Software"), to deal
@@ -274,6 +274,7 @@ Inherits DesktopApplication
 	#tag EndNote
 
 	#tag Note, Name = ReadMe: About missing images
+		
 		When you first open the project, Xojo may not find the images.
 		This is a common problem when a Xojo project is moved to another computer.
 		The images are all located in the pictures folder : Don't panic, none are missing.
@@ -284,7 +285,8 @@ Inherits DesktopApplication
 	#tag EndNote
 
 	#tag Note, Name = ReadMe: Adapting to your needs
-		I wrote in the comments a tag // [Update-XojoCode-NextLines]
+		I wrote in the comments a tag : // [Update-XojoCode-NextLines]
+		
 		When you see this tag in comments, it means that the program probably needs to be modified in the following lines to meet your needs.
 		If you see this tag in the declaration of a variable, it means that you will probably need to modify the name of the variable or its default value to adapt the program to your needs.
 		Please note: This does not mean that depending on what you want to do, you will only need to modify these lines.
@@ -298,9 +300,10 @@ Inherits DesktopApplication
 		* Procedure to unlock data export to Microsoft Excel *
 		------------------------------------------------------
 		
+		
 		1- You will need to copy the MSOfficeAutomation plugin (located in the Extras folder of the xojo installation) to the Plugins folder before you can use this functionality.
 		2- Exit Xojo and relaunch the application
-		3- You must have Microsoft Excel installed on your computer, only works on Windows PC.
+		3- You must have Microsoft Excel installed on your computer, ONLY works on Windows PC.
 		4- Open Class Class_Export, open methods Export_Excel : read the comments
 		5- Inside Class_Export.Export_Excel : Uncomment the area defined by the comments (From: #If Target Windows ... until #Endif)
 		
@@ -312,6 +315,7 @@ Inherits DesktopApplication
 
 	#tag Note, Name = ReadMe: Project structure
 		The project includes 3 windows :
+		
 		- A start window ( Win_Welcome ) that includes the menu for opening, creating, and closing databases and a number of indications.
 		- A data list window ( Win_CustomerList ) that allows you to Create, Read, Modify, Delete records from the SQLite database.
 		- A customer data entry form (Win_CustomerForm)
@@ -331,12 +335,15 @@ Inherits DesktopApplication
 		In the event that these instructions change or their uses change, your program is not to be thrown away. 
 		Using classes ensures a certain longevity of the project.
 		
+		
 		2 - Class_XojoDBDict :
 		The purpose of this class is to initialize the SQLite database.
 		This class creates the blank tables necessary for the program to function.
 		
+		
 		3- Class_MenuTable and Class_MenuWelcome
 		Manages the program menus.
+		
 		
 		4- Class_Export
 		The purpose of this class is to export the database data in CSV or Microsoft Excel format.
