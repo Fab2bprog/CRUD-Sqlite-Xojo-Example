@@ -64,7 +64,17 @@ Protected Class Class_Customer
 		  End Try
 		  
 		  Try
-		    Field_BirthDay          = DateTime.FromString(DBaseRS.Column("BIRTHDAY").DateTimeValue.SQLDate)
+		    // Safe retrieval of the BIRTHDAY column value
+		    Var birthDayCol As DatabaseColumn = DBaseRS.Column("BIRTHDAY")
+		    
+		    If birthDayCol <> Nil And birthDayCol.DateTimeValue <> Nil Then
+		      // Column exists and has valid datetime value
+		      Field_BirthDay = birthDayCol.DateTimeValue
+		    Else
+		      Var Date_Default As New DateTime(1970, 1, 1)
+		      Field_BirthDay=Date_Default 
+		    End If
+		    
 		  Catch error As NilObjectException
 		    Var Date_Default As New DateTime(1970, 1, 1)
 		    Field_BirthDay=Date_Default 
